@@ -1,4 +1,4 @@
-var serverUrl = "https://my.salamandra.ua/";
+var serverUrl = "https://my.site.ua/";
 var baseUrl = "/osago/js";
 var currentCalculator = 'new_osago';
 var currentCalculatortype = 'osago';
@@ -29,17 +29,6 @@ require.config({
         "menuAim": "lib/jquery.menu-aim",
         "nanoScroller": "lib/jquery.nanoscroller.min"
     },
-    // shim: {
-    //     "jquery": {
-    //         exports: "$"
-    //     },
-    //     // "jquery-ui"  : ["jquery"],
-    //     "jquery-jscrollpane": ["jquery-min"],
-    //     "jquery-mousewheel": ["jquery-min"],
-    //     "jquery-visible": ["jquery-min"],
-    //     "jquery-customselect": ["jquery-min"],
-    //     // "main_function"  : ["jquery","jquery-jscrollpane","jquery-mousewheel","jquery-visible","customselect"],
-    // },
     waitSeconds: 30
 });
 
@@ -61,7 +50,7 @@ require(["jquery-private", "jqueryForm", "validateApp", "mustache", "jqueryUI", 
         $.ajax({
             type: "post",
             dataType: "json",
-            url: 'https://my.salamandra.ua/calculate/ajax/new_osago',
+            url: 'https://my.site.ua/calculate/ajax/new_osago',
             success: function (data) {
                 // console.log(data)
                 $('body').append('<link href="/osago/css/customcalc.css" rel="stylesheet" type="text/css">');
@@ -323,7 +312,6 @@ require(["jquery-private", "jqueryForm", "validateApp", "mustache", "jqueryUI", 
                                             + ($(this).is(":disabled") ? ' option-disabled' : '')
                                             + ($options.useoptionclass && $(this).attr("class") ? ' ' + $(this).attr("class") : ''),
                                             'data-value': val,
-                                            // 'data-rating': $(this).attr("data-rating"),
                                             'text': txt.length > 0 ? txt : $options.emptytext
                                         }).appendTo(select);
                                     }
@@ -844,12 +832,10 @@ require(["jquery-private", "jqueryForm", "validateApp", "mustache", "jqueryUI", 
             data: fields,
             url: serverUrl + '/calculate/ajax/' + currentCalculator + devSuffix,
             success: function (data) {
-                console.log(data.sum);
                 $('#sum').text(data.sum);
                 $('.deductible').text(data.deductible);
             }
         });
-        // calculateOsagoNew
     }
 
     function makeOrderBlock(event) {
@@ -1018,7 +1004,6 @@ require(["jquery-private", "jqueryForm", "validateApp", "mustache", "jqueryUI", 
                 makeLoad();
             });
         function makeLoad() {
-            //console.log(input);
             if ($(this).val().length < 2) return false;
             var term = $(this).val();
             //$('[name="auto_marka[' + productKey + ']"]').val('');
@@ -1108,10 +1093,8 @@ require(["jquery-private", "jqueryForm", "validateApp", "mustache", "jqueryUI", 
                         var markaid = currentMenuSelector.attr('markaid');
                         var markaName = currentMenuSelector.text();
                         var modelsList = $('#modelSet_' + currentMenuSelector.attr('markaid')).find('.nano-content')
-                        //.addClass('modelsList')
                             .html('Завантажую...');
 
-                        // .appendTo(this);
 
                         if (markaid in markaCache) {
                             showModelsInMarka(markaCache[markaid]);
@@ -1467,11 +1450,6 @@ require(["jquery-private", "jqueryForm", "validateApp", "mustache", "jqueryUI", 
 
         function initOrderValidation() {
 
-            /* $.validator.addMethod("autoComplete", function (value, element) {
-             return element.getAttribute('data-id') !== null;
-             }, Mustache.render('{{order_validation_autoComplete}}Виберіть, будь-ласка елемент з випадаючого списку', translation));*/
-
-
             var rules = {
                 'contactLastName': {
                     required: true,
@@ -1544,11 +1522,6 @@ require(["jquery-private", "jqueryForm", "validateApp", "mustache", "jqueryUI", 
                 placePreloader('' + Mustache.render('{{travel_waitingRequest}}', translation) + '');
                 clearFormBeforeSubmit();
                 console.log('ready to sent');
-                // $('#makeOrderForm').ajaxSubmit({
-                //     type: 'post',
-                //     url: serverUrl + 'personal_insurance/makeOrderSubmit',
-                //     success: successMakeOrder
-                // });
             }
         }
 
@@ -1561,14 +1534,6 @@ require(["jquery-private", "jqueryForm", "validateApp", "mustache", "jqueryUI", 
             value = value.replace('+38', '');
             $('[name="contactMob"]').val(value)
         }
-
-        /*.custom-select input {
-         width: 298px;
-         border: 1px solid #888;
-         margin: 5px 5px 0;
-         padding: 5px;
-         font-size: 14px
-         }*/
     }
 });
 
